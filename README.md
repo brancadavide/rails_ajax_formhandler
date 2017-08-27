@@ -3,6 +3,9 @@
 Makes submitting forms remotely via ajax even easier and handles server responded validation errors by adding error-styles and error-messages to each invalid input-field.
 
 ![example1](https://raw.githubusercontent.com/brancadavide/rails_ajax_formhandler/master/input_validation_example1.png)
+
+
+
 ![example2](https://raw.githubusercontent.com/brancadavide/rails_ajax_formhandler/master/input_validation_example2.png)
 
 
@@ -22,6 +25,18 @@ And then execute:
 Or install it yourself as:
 
     $ gem install rails_ajax_formhandler
+
+In your application.js 
+
+```javascript
+//=require ajax_formhandler
+```
+
+If you want to use built in validation-styles, add to your application.scss
+
+```css
+@import "ajax_formhandler";
+```
 
 ## Usage
 
