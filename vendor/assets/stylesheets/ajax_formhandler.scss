@@ -1,0 +1,27 @@
+
+/*
+RailsAjaxFormhandler  by Davide Brancaccio
+
+Default style-definition for error-validation
+
+*/
+
+.fh-error-field>input[type=text], 
+.fh-error-field>input[type=number], 
+.fh-error-field>input[type=phone], 
+.fh-error-field>input[type=email], 
+.fh-error-field>select, 
+.fh-error-field>textarea {
+		border: 1px solid #bc1339;
+		color: 1px solid #bc1339;
+}
+
+.fh-error-field>label {
+	color:  #bc1339;
+	font-weight: bolder;
+}
+
+.fh-error-field>.help-block {
+	color: #bc1339;
+	padding: 10px;
+}
