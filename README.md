@@ -40,7 +40,74 @@ If you want to use built in validation-styles, add to your application.scss
 
 ## Usage
 
-TODO: Write usage instructions here
+This works with standard generated scaffold controllers, models and views seamlessely!
+Just add the following line to your js-file, for example 'client.js':
+
+```javascript
+$(document).ready(function{
+	
+	var form_handler = new FormHandler();
+	form_handler.init();
+
+});
+
+```
+
+## Global Options
+
+"new FormHandler()" accepts an option object as only argument:
+
+
+## HTML
+
+html: 	- an object:
+
+```javascript
+html:	{ 
+		wrapperTag: "div", // each input field and label must be wrapped in order to apply the validation-error-markup
+		errorClassName: "fh-error-field",// default, using the build-in styles
+		helpBlockClass: "help-block" // default
+
+}
+```
+or, if you're using Bootstrap Version 3, just
+
+```javascript
+html:	"bootstrap3"
+```
+
+## Callbacks
+
+success: 	 a function with the with jqXHR as first, the form-object as second and the event as third argument
+
+
+```javascript
+success:	function(xhr, form, event) {
+	// what happens after successive submit
+}
+```
+
+
+error:  function with jqXHR as first, the errorThrown(string) as second, the form-object as third and the event as forth argument:
+
+
+```javascript
+error:	function(xhr,error, form, event) {
+	// any additional actions
+}
+```
+
+send:  function with the event only argument, will be called on submit
+
+
+```javascript
+send:	function(event) {
+	// any additional actions
+}
+```
+
+
+
 
 ## Development
 
