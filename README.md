@@ -88,7 +88,7 @@ or, if you're using Bootstrap Version 3
 
 ## Callbacks
 
-###success 	 
+### success 	 
 a function with the with jqXHR as first, the form-object as second and the event as third argument
 
 
@@ -101,7 +101,7 @@ a function with the with jqXHR as first, the form-object as second and the event
 ```
 
 
-###error  
+### error  
 function with jqXHR as first, the errorThrown(string) as second, the form-object as third and the event as forth argument
 
 
@@ -113,7 +113,7 @@ function with jqXHR as first, the errorThrown(string) as second, the form-object
 }
 ```
 
-###send  
+### send  
 function with the event only argument, will be called on submit
 
 
@@ -125,7 +125,7 @@ function with the event only argument, will be called on submit
 }
 ```
 
-#*Example:*
+# *Example:*
 
 
 ```javascript
