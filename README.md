@@ -98,7 +98,7 @@ jqXHR as first, the form-object as second and the event as third argument
 
 ```javascript
 { ...
-	success:	function(xhr, form, event) {
+	success: function(xhr, form, event) {
 	// what happens after success
 	}
 }
@@ -111,7 +111,7 @@ jqXHR as first, the errorThrown(string) as second, the form-object as third and 
 
 ```javascript
 { ...
-	error:	function(xhr,error, form, event) {
+	error: function(xhr,error, form, event) {
 	// any additional actions
 	}
 }
@@ -123,7 +123,7 @@ event as only argument, will be called on submit
 
 ```javascript
 {		
-	send:	function(event) {
+	send: function(event) {
 	// any additional actions
 	}
 }
@@ -138,7 +138,7 @@ event as only argument, will be called on submit
 	errorClass: "my-error-class",
 	helpBlockClass: "my-help-block"
 	},
-	success:	function(xhr, form, event) {
+	success: function(xhr, form, event) {
 		$("#success-message").html("Form successfully submitted");
 		form[0].reset();
 	}
