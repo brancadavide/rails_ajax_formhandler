@@ -173,13 +173,13 @@ end
 _Note_ that the json response in case of error works only if the json-string contains only the errors-object, or, if namespacing is required, the object name as key and the errors as values.
 
 ```ruby 
-	f.json { render _json: @client.errors_, status: :unprocessable_entity }
+	f.json { render json: @client.errors, status: :unprocessable_entity }
 
 ```
 or
 
 ```ruby 
-	f.json { render _json: { client: @client.errors, data: "some other stuff"}_, status: :unprocessable_entity }
+	f.json { render json: { client: @client.errors, data: "some other stuff"}, status: :unprocessable_entity }
 
 ```
 That gives you the possibility, passing some other informations alongside the errors-object, if required.
