@@ -64,7 +64,7 @@ __Please note that in order to work, use the "form_for"-helper in your view as u
 ## HTML
 
 ### html
- an object
+ accepts an object with the keys shown below
 
 ```javascript
 {
@@ -86,23 +86,27 @@ or, if you're using Bootstrap Version 3
 }
 ```
 
+
 ## Callbacks
 
+all callbacks accepting only a function	
+
 ### success 	 
-a function with the with jqXHR as first, the form-object as second and the event as third argument
+
+jqXHR as first, the form-object as second and the event as third argument
 
 
 ```javascript
 { ...
 	success:	function(xhr, form, event) {
-	// what happens after successfull submit
+	// what happens after success
 	}
 }
 ```
 
 
 ### error  
-function with jqXHR as first, the errorThrown(string) as second, the form-object as third and the event as forth argument
+jqXHR as first, the errorThrown(string) as second, the form-object as third and the event as forth argument
 
 
 ```javascript
@@ -114,7 +118,7 @@ function with jqXHR as first, the errorThrown(string) as second, the form-object
 ```
 
 ### send  
-function with the event only argument, will be called on submit
+event as only argument, will be called on submit
 
 
 ```javascript
@@ -125,7 +129,7 @@ function with the event only argument, will be called on submit
 }
 ```
 
-# *Example:*
+### *Example:*
 
 
 ```javascript
@@ -135,7 +139,8 @@ function with the event only argument, will be called on submit
 	helpBlockClass: "my-help-block"
 	},
 	success:	function(xhr, form, event) {
-		$("#succes-message").html("Form successfully submitted")
+		$("#success-message").html("Form successfully submitted");
+		form[0].reset();
 	}
 }
 ```
@@ -150,7 +155,7 @@ def create
  if @client.save
   f.json { render :show, status: :created}
  else
- 	f.json { render json: @client.errors, status: :unprocessable_entity }
+  f.json { render json: @client.errors, status: :unprocessable_entity }
  end  
 end
 
@@ -159,12 +164,25 @@ def update
  if @client.update(client_params)
   f.json { render :show, status: :ok}
  else
- 	f.json { render json: @client.errors, status: :unprocessable_entity }
- end
-  
+  f.json { render json: @client.errors, status: :unprocessable_entity }
+ end  
 end
 
 ```
+
+_Note_ that the json response in case of error works only if the json-string contains only the errors-object, or, if namespacing is required, the object name as key and the errors as values.
+
+```ruby 
+	f.json { render _json: @client.errors_, status: :unprocessable_entity }
+
+```
+or
+
+```ruby 
+	f.json { render _json: { client: @client.errors, data: "some other stuff"}_, status: :unprocessable_entity }
+
+```
+That gives you the possibility, passing some other informations alongside the errors-object, if required.
 
 ## Model
 
@@ -176,13 +194,13 @@ validates :firstname, presence: { message: "We need your firstname!"}
 
 ```
 
-If you're not familiar with, please refer to [guides.rubyonrails](http://guides.rubyonrails.org/active_record_validations.html).
+If you're not familiar with, please refer to [http://guides.rubyonrails.org](http://guides.rubyonrails.org/active_record_validations.html).
 
 
 ## Multiple Forms
 
 If you have two or more forms on one page, FormHandler detects them all and sets them up. The passed arguments will be applied to each form. For specific configuration, call the ".config_form()"
- method:
+method:
 
  ```javascript
  
@@ -197,8 +215,33 @@ If you have two or more forms on one page, FormHandler detects them all and sets
  })
 
  form_handler.init();
-
  ```
+## Hidden fields
+
+In some cases the input-field shown in the form doesn't store the actual value, but updates a hidden_field, which will be submitted.For example, a datepicker:
+
+![datepicker](https://raw.githubusercontent.com/brancadavide/rails_ajax_formhandler/master/input_datepicker.png)
+
+would look like
+
+
+```ruby
+...
+<div class="field">
+<input type="text" class="datepicker" id="datepicker-input">
+
+<%= f.hidden_field :date_of_birth %>
+</div>
+```
+
+In this case please make sure that the hidden-input appears _after_ the 'dummy-field', like in the example above in order to render validation errors properly!
+
+
+## Support
+
+I hope this usefull for you as it is for me. If there are any issues, pleas contact me [info@yield-in.de](info@yield-in.de)
+
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

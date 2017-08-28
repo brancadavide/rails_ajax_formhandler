@@ -3,6 +3,7 @@
 /*
 Form-Handler by Davide Brancaccio
 
+
 FormHandler submits your form automatically via ajax and handles validation-rendering also by adding error-styles and messages.
 This works without any additional setup with standard-rails scaffold forms and controllers, just by adding validations to the model.
 
@@ -27,6 +28,18 @@ Example scaffold 'Client':
 				format.json { render json: @client.errors, status: :unprocessable_entity}
 
 				...
+
+	show.json.jbuilder
+
+					...
+					json.extract! @client, :id,:firstname,:lastname,...
+
+				<or if namespacing is required>
+
+					json.set! :client do |client|
+							client.extract! @client, :id,:firstname,:lastname,...
+					end
+					....
 
 	_form.html.erb
 
@@ -86,7 +99,97 @@ Example scaffold 'Client':
 	
 					}
 
+	as example:
+	----------
+							var form_handler = new FormHandler({
+										html: {
+												errorClass: "my-error-class",
+												helpBlockClass: "error-feedback"
+										},
+										success: function(xhr, form, event) {
+											var response = xhr.responseJSON;
+											$(form)....
+										}
+							})
 
+							form_handler.init();
+	
+	--------------------------------------------------------------------------------------------------------------
+
+	Multiple Form Support
+	----------------------
+
+	If you use more than one form on one page, FormHandler detects it automatically and applies given options to all forms.
+	So your settings become global. To specify the options for every single form just use the 'config_form()' method and provide
+	the form-name, for eexample "client" and the specified options like
+
+			form_handler.config_form('client', {
+					success: function(xhr, form, event) {
+							...do anything else
+					}
+			})
+	
+	if, for some reasons, you don't want to FormHandler to take care of one or some forms, just pass ' ignore: true':
+
+			form_handler.config_form('client', {
+					ignore: true
+					}
+			});
+
+
+	Redirections
+	-------------
+
+	In some cases, the shown input field is not actually the field meant to be submitted, instead the value is stored in an hidden input.
+	For example when you use datepicker or typeahead.
+
+	Because FormHandler takes advantage of rails-naming-convention, it is looking for the hidden input-field. 
+	To work properly, the hidden-input musst be of course inside a wrapper and must appear after the 'dummy-input'.
+
+	But if you try to edit the record, the existing value doesn't show up either, if you haven't done any workarounds.
+
+
+	To make sure that the validation-rendering works reliable and the value is shown also on your edit-form, use the 
+	'apply_validation_to()' method. 
+
+	Example
+	-------
+
+	_form.html.erb
+					....
+					<input type="text" id="date_show" class="any-datepicker">
+					<%= f.hidden_field :date_of_birth %>
+					....
+
+	client.js 
+						var form_handler = new FormHandler({
+										html: {
+												errorClass: "my-error-class",
+												helpBlockClass: "error-feedback"
+										},
+										success: function(xhr, form, event) {
+											var response = xhr.responseJSON;
+											$(form)....
+										}
+							});
+
+							form_handler.apply_validation_to("client",{
+								"client_date_of_birth": "date_show"
+							})
+
+							form_handler.init();
+
+or even easier with data-attribute:
+		
+
+		_form.html.erb
+					....
+					<input type="text" id="date_show" class="any-datepicker">
+					<%= f.hidden_field :date_of_birth, data: {validation: "date_show"} %>
+					....
+
+
+PLEASE NOTE THAT VALIDATION-RENDERING NOT WORKING WITH NESTED ATTRIBUTES, AT LEAST NOT WITHOUT ANY WORKAROUNDS!
 
 */
 
@@ -373,7 +476,6 @@ FormObject.prototype.get_ajax_settings = function(event,values) {
 			var field = $("#" + value); 
 			form_object.validation_renderer.remove_error(field);
 		})
-		this.form[0].reset();
 	};
 
 	
