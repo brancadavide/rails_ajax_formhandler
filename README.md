@@ -52,6 +52,9 @@ $(document).ready(function{
 });
 
 ```
+I'll automatically detects your form and set an event-listener, so the form will be submitted with ajax.
+
+__Please note that in order to work, use the "form_for"-helper in your view as usual!__
 
 ## Global Options
 
@@ -60,8 +63,8 @@ $(document).ready(function{
 
 ## HTML
 
-html
-an object
+### html
+ an object
 
 ```javascript
 {
@@ -85,7 +88,7 @@ or, if you're using Bootstrap Version 3
 
 ## Callbacks
 
-success 	 
+###success 	 
 a function with the with jqXHR as first, the form-object as second and the event as third argument
 
 
@@ -98,7 +101,7 @@ a function with the with jqXHR as first, the form-object as second and the event
 ```
 
 
-error  
+###error  
 function with jqXHR as first, the errorThrown(string) as second, the form-object as third and the event as forth argument
 
 
@@ -110,7 +113,7 @@ function with jqXHR as first, the errorThrown(string) as second, the form-object
 }
 ```
 
-send  
+###send  
 function with the event only argument, will be called on submit
 
 
@@ -122,7 +125,7 @@ function with the event only argument, will be called on submit
 }
 ```
 
-Example:
+#*Example:*
 
 
 ```javascript
