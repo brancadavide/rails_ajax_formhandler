@@ -178,11 +178,7 @@ If you're not familiar with, please refer to [guides.rubyonrails](http://guides.
 
 ## Multiple Forms
 
-<<<<<<< HEAD
 If you have two or more forms on one page, FormHandler detects them all and sets them up. The passed arguments will be applied to each form. For specific configuration, call the ".config_form()"
-=======
-If you have two or more forms on one page, FormHandler detects them all and sets them up. The passed arguments will be applied to each for. For specific configuration, call the ".config_form()"
->>>>>>> 9d6f3ee23dfee4cef6f8454363e58dd9d7624de3
  method:
 
  ```javascript
