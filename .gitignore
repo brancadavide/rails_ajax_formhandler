@@ -7,3 +7,8 @@
 /pkg/
 /spec/reports/
 /tmp/
+<<<<<<< HEAD
+=======
+/.gitignore
+/lib/.DS_Store
+>>>>>>> 9d6f3ee23dfee4cef6f8454363e58dd9d7624de3
