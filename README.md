@@ -116,12 +116,48 @@ function with the event only argument, will be called on submit
 
 ```javascript
 {		
-		send:	function(event) {
-		// any additional actions
-		}
+	send:	function(event) {
+	// any additional actions
+	}
 }
 ```
 
+## Controller setup
+
+```ruby
+def create
+ @client = Client.new(client_params)
+ respond_to do |f|
+ if @client.save
+  f.json { render :show, status: :created}
+ else
+ 	f.json { render json: @client.errors, status: :unprocessable_entity }
+ end  
+end
+
+def update
+ respond_to do |f|
+ if @client.update(client_params)
+  f.json { render :show, status: :ok}
+ else
+ 	f.json { render json: @client.errors, status: :unprocessable_entity }
+ end
+  
+end
+
+```
+
+## Model
+
+Insert your validations in the model and pass your error-messages like:
+
+
+```ruby
+validates :firstname, presence: { message: "We need your firstname!"}
+
+```
+
+If you're not familiar with, please refer to [guides.rubyonrails](http://guides.rubyonrails.org/active_record_validations.html).
 
 
 
