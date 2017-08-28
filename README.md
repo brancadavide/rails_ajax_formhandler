@@ -1,6 +1,6 @@
 # RailsAjaxFormhandler
 
-Makes submitting forms remotely via ajax even easier and handles server responded validation errors by adding error-styles and error-messages to each invalid input-field.
+Submits forms remotely with ajax automatically and handles server responded validation errors by adding error-styles and error-messages to each invalid input-field.
 
 ![example1](https://raw.githubusercontent.com/brancadavide/rails_ajax_formhandler/master/input_validation_example1.png)
 
@@ -92,7 +92,7 @@ a function with the with jqXHR as first, the form-object as second and the event
 ```javascript
 { ...
 	success:	function(xhr, form, event) {
-	// what happens after successive submit
+	// what happens after successfull submit
 	}
 }
 ```
@@ -121,6 +121,22 @@ function with the event only argument, will be called on submit
 	}
 }
 ```
+
+Example:
+
+
+```javascript
+{ html: {
+	wrapperTag: "div",
+	errorClass: "my-error-class",
+	helpBlockClass: "my-help-block"
+	},
+	success:	function(xhr, form, event) {
+		$("#succes-message").html("Form successfully submitted")
+	}
+}
+```
+
 
 ## Controller setup
 
@@ -160,7 +176,26 @@ validates :firstname, presence: { message: "We need your firstname!"}
 If you're not familiar with, please refer to [guides.rubyonrails](http://guides.rubyonrails.org/active_record_validations.html).
 
 
+## Multiple Forms
 
+If you have two or more forms on one page, FormHandler detects them all and sets them up. The passed arguments will be applied to each for. For specific configuration, call the ".config_form()"
+ method:
+
+ ```javascript
+ 
+ var form_handler = new FormHandler({ html: "bootstrap3"})
+
+ // first argument is the modelname
+ // do this before you call ".init()"
+ form_handler.config_form("client",{
+ 	success: function(xhr,form, event ) {
+ 	 // do something special....
+ 	}
+ })
+
+ form_handler.init();
+
+ ```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
