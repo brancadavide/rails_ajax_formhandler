@@ -1,8 +1,14 @@
 # RailsAjaxFormhandler
 
-Makis submitting forms remotely via ajax even easier and handles server responded validation errors by adding error-styles and error-messages to each invalid input-field.
+Submits forms remotely with ajax automatically and handles server responded validation errors by adding error-styles and error-messages to each invalid input-field.
 
-![example](https://raw.githubusercontent.com/brancadavide/rails_ajax_formhandler/master/input_validation_example.png)
+![example1](https://raw.githubusercontent.com/brancadavide/rails_ajax_formhandler/master/input_validation_example1.png)
+
+
+
+![example2](https://raw.githubusercontent.com/brancadavide/rails_ajax_formhandler/master/input_validation_example2.png)
+
+
 
 ## Installation
 
@@ -20,10 +26,176 @@ Or install it yourself as:
 
     $ gem install rails_ajax_formhandler
 
+In your application.js 
+
+```javascript
+//=require ajax_formhandler
+```
+
+If you want to use built in validation-styles, add to your application.scss
+
+```css
+@import "ajax_formhandler";
+```
+
 ## Usage
 
-TODO: Write usage instructions here
+This works with standard generated scaffold controllers, models and views seamlessely!
+Just add the following line to your js-file, for example 'client.js':
 
+```javascript
+$(document).ready(function{
+	
+	var form_handler = new FormHandler();
+	form_handler.init();
+
+});
+
+```
+
+## Global Options
+
+"new FormHandler()" accepts an option object as only argument:
+
+
+## HTML
+
+html
+an object
+
+```javascript
+{
+   html:{ 
+		wrapperTag: "div", 
+		// each input field and label must be wrapped in order to apply the validation-error-markup
+		errorClassName: "fh-error-field",
+		// default, using the build-in styles
+		helpBlockClass: "help-block" 
+		// default
+	 },...
+}
+```
+or, if you're using Bootstrap Version 3
+
+```javascript
+{
+	html:	"bootstrap3",...
+}
+```
+
+## Callbacks
+
+success 	 
+a function with the with jqXHR as first, the form-object as second and the event as third argument
+
+
+```javascript
+{ ...
+	success:	function(xhr, form, event) {
+	// what happens after successfull submit
+	}
+}
+```
+
+
+error  
+function with jqXHR as first, the errorThrown(string) as second, the form-object as third and the event as forth argument
+
+
+```javascript
+{ ...
+	error:	function(xhr,error, form, event) {
+	// any additional actions
+	}
+}
+```
+
+send  
+function with the event only argument, will be called on submit
+
+
+```javascript
+{		
+	send:	function(event) {
+	// any additional actions
+	}
+}
+```
+
+Example:
+
+
+```javascript
+{ html: {
+	wrapperTag: "div",
+	errorClass: "my-error-class",
+	helpBlockClass: "my-help-block"
+	},
+	success:	function(xhr, form, event) {
+		$("#succes-message").html("Form successfully submitted")
+	}
+}
+```
+
+
+## Controller setup
+
+```ruby
+def create
+ @client = Client.new(client_params)
+ respond_to do |f|
+ if @client.save
+  f.json { render :show, status: :created}
+ else
+ 	f.json { render json: @client.errors, status: :unprocessable_entity }
+ end  
+end
+
+def update
+ respond_to do |f|
+ if @client.update(client_params)
+  f.json { render :show, status: :ok}
+ else
+ 	f.json { render json: @client.errors, status: :unprocessable_entity }
+ end
+  
+end
+
+```
+
+## Model
+
+Insert your validations in the model and pass your error-messages like:
+
+
+```ruby
+validates :firstname, presence: { message: "We need your firstname!"}
+
+```
+
+If you're not familiar with, please refer to [guides.rubyonrails](http://guides.rubyonrails.org/active_record_validations.html).
+
+
+## Multiple Forms
+
+If you have two or more forms on one page, FormHandler detects them all and sets them up. The passed arguments will be applied to each form. For specific configuration, call the ".config_form()"
+ method:
+
+ ```javascript
+ 
+ var form_handler = new FormHandler({ html: "bootstrap3"})
+
+ // first argument is the modelname
+ // do this before you call ".init()"
+ form_handler.config_form("client",{
+ 	success: function(xhr,form, event ) {
+ 	 // do something special....
+ 	}
+ })
+
+ form_handler.init();
+
+ ```
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
