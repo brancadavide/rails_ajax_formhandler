@@ -60,49 +60,66 @@ $(document).ready(function{
 
 ## HTML
 
-html: 	- an object:
+html:
+an object
+
 
 ```javascript
-html:	{ 
-		wrapperTag: "div", // each input field and label must be wrapped in order to apply the validation-error-markup
-		errorClassName: "fh-error-field",// default, using the build-in styles
-		helpBlockClass: "help-block" // default
-
+{
+   html:	{ 
+							wrapperTag: "div", 
+							// each input field and label must be wrapped in order to apply the validation-error-markup
+							errorClassName: "fh-error-field",
+							// default, using the build-in styles
+							helpBlockClass: "help-block" 
+							// default
+						},...
 }
 ```
 or, if you're using Bootstrap Version 3, just
 
 ```javascript
-html:	"bootstrap3"
+{
+		html:	"bootstrap3",...
+}
 ```
 
 ## Callbacks
 
-success: 	 a function with the with jqXHR as first, the form-object as second and the event as third argument
+success: 	 
+a function with the with jqXHR as first, the form-object as second and the event as third argument
 
 
 ```javascript
-success:	function(xhr, form, event) {
-	// what happens after successive submit
+{ ...
+		success:	function(xhr, form, event) {
+		// what happens after successive submit
+		}
 }
 ```
 
 
-error:  function with jqXHR as first, the errorThrown(string) as second, the form-object as third and the event as forth argument:
+error:  
+function with jqXHR as first, the errorThrown(string) as second, the form-object as third and the event as forth argument
 
 
 ```javascript
-error:	function(xhr,error, form, event) {
-	// any additional actions
+{ ...
+		error:	function(xhr,error, form, event) {
+		// any additional actions
+		}
 }
 ```
 
-send:  function with the event only argument, will be called on submit
+send:  
+function with the event only argument, will be called on submit
 
 
 ```javascript
-send:	function(event) {
-	// any additional actions
+{		
+		send:	function(event) {
+		// any additional actions
+		}
 }
 ```
 
