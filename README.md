@@ -45,9 +45,9 @@ Just add the following line to your js-file, for example 'client.js':
 
 ```js
 $(document).ready(function{
-	
-	var form_handler = new FormHandler();
-	form_handler.init();
+ 
+  var form_handler = new FormHandler();
+  form_handler.init();
 
 });
 
@@ -68,21 +68,21 @@ __Please note that in order to work, use the "form_for"-helper in your view as u
 
 ```js
 {
-   html:{ 
-		wrapperTag: "div", 
-		// each input field and label must be wrapped in order to apply the validation-error-markup
-		errorClassName: "fh-error-field",
-		// default, using the build-in styles
-		helpBlockClass: "help-block" 
-		// default
-	 },...
+ html:{ 
+  wrapperTag: "div", 
+   // each input field and label must be wrapped in order to apply the validation-error-markup
+  errorClassName: "fh-error-field",
+  // default, using the build-in styles
+  helpBlockClass: "help-block" 
+  // default
+  },...
 }
 ```
 or, if you're using Bootstrap Version 3
 
 ```js
 {
-	html:	"bootstrap3",...
+  html:	"bootstrap3",...
 }
 ```
 
@@ -98,9 +98,9 @@ jqXHR as first, the form-object as second and the event as third argument
 
 ```js
 { ...
-	success: function(xhr, form, event) {
-	// what happens after success
-	}
+  success: function(xhr, form, event) {
+  // what happens after success
+  }
 }
 ```
 
@@ -111,9 +111,9 @@ jqXHR as first, the errorThrown(string) as second, the form-object as third and 
 
 ```js
 { ...
-	error: function(xhr,error, form, event) {
-	// any additional actions
-	}
+  error: function(xhr,error, form, event) {
+  // any additional actions
+  }
 }
 ```
 
@@ -122,10 +122,10 @@ event as only argument, will be called on submit
 
 
 ```js
-{		
-	send: function(event) {
-	// any additional actions
-	}
+{ 
+  send: function(event) {
+  // any additional actions
+ }
 }
 ```
 
@@ -134,14 +134,14 @@ event as only argument, will be called on submit
 
 ```js
 { html: {
-	wrapperTag: "div",
-	errorClass: "my-error-class",
-	helpBlockClass: "my-help-block"
-	},
-	success: function(xhr, form, event) {
-		$("#success-message").html("Form successfully submitted");
-		form[0].reset();
-	}
+  wrapperTag: "div",
+  errorClass: "my-error-class",
+  helpBlockClass: "my-help-block"
+ },
+ success: function(xhr, form, event) {
+  $("#success-message").html("Form successfully submitted");
+  form[0].reset();
+  }
 }
 ```
 
@@ -173,13 +173,13 @@ end
 _Note_ that the json response in case of error works only if the json-string contains only the errors-object, or, if namespacing is required, the object name as key and the errors as values.
 
 ```ruby 
-	f.json { render json: @client.errors, status: :unprocessable_entity }
+  f.json { render json: @client.errors, status: :unprocessable_entity }
 
 ```
 or
 
 ```ruby 
-	f.json { render json: { client: @client.errors, data: "some other stuff"}, status: :unprocessable_entity }
+  f.json { render json: { client: @client.errors, data: "some other stuff"}, status: :unprocessable_entity }
 
 ```
 That gives you the possibility, passing some other informations alongside the errors-object, if required.
