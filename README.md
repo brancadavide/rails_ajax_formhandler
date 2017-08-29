@@ -28,7 +28,7 @@ Or install it yourself as:
 
 In your application.js 
 
-```javascript
+```js
 //=require ajax_formhandler
 ```
 
@@ -43,7 +43,7 @@ If you want to use built in validation-styles, add to your application.scss
 This works with standard generated scaffold controllers, models and views seamlessely!
 Just add the following line to your js-file, for example 'client.js':
 
-```javascript
+```js
 $(document).ready(function{
 	
 	var form_handler = new FormHandler();
@@ -66,7 +66,7 @@ __Please note that in order to work, use the "form_for"-helper in your view as u
 ### html
  accepts an object with the keys shown below
 
-```javascript
+```js
 {
    html:{ 
 		wrapperTag: "div", 
@@ -80,7 +80,7 @@ __Please note that in order to work, use the "form_for"-helper in your view as u
 ```
 or, if you're using Bootstrap Version 3
 
-```javascript
+```js
 {
 	html:	"bootstrap3",...
 }
@@ -96,7 +96,7 @@ all callbacks accepting only a function
 jqXHR as first, the form-object as second and the event as third argument
 
 
-```javascript
+```js
 { ...
 	success: function(xhr, form, event) {
 	// what happens after success
@@ -109,7 +109,7 @@ jqXHR as first, the form-object as second and the event as third argument
 jqXHR as first, the errorThrown(string) as second, the form-object as third and the event as forth argument
 
 
-```javascript
+```js
 { ...
 	error: function(xhr,error, form, event) {
 	// any additional actions
@@ -121,7 +121,7 @@ jqXHR as first, the errorThrown(string) as second, the form-object as third and 
 event as only argument, will be called on submit
 
 
-```javascript
+```js
 {		
 	send: function(event) {
 	// any additional actions
@@ -132,7 +132,7 @@ event as only argument, will be called on submit
 ### *Example:*
 
 
-```javascript
+```js
 { html: {
 	wrapperTag: "div",
 	errorClass: "my-error-class",
@@ -202,7 +202,7 @@ If you're not familiar with, please refer to [http://guides.rubyonrails.org](htt
 If you have two or more forms on one page, FormHandler detects them all and sets them up. The passed arguments will be applied to each form. For specific configuration, call the ".config_form()"
 method:
 
- ```javascript
+ ```js
  
  var form_handler = new FormHandler({ html: "bootstrap3"})
 
