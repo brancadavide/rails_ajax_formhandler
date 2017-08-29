@@ -236,20 +236,12 @@ would look like
 In this case please make sure that the hidden-input appears _after_ the 'dummy-field', like in the example above in order to render validation errors properly!
 
 
-## Support
 
-I hope this usefull for you as it is for me. If there are any issues, pleas contact me [info@yield-in.de](info@yield-in.de)
+## Contributing and Support
 
+Bug reports and pull requests are welcome on GitHub at https://github.com/brancadavide/rails_ajax_formhandler. 
+For support just contact me [info@yield-in.de](mailto:info@yield-in.de)
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/brancadavide/rails_ajax_formhandler. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 
 ## License
