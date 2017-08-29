@@ -242,7 +242,11 @@ In this case please make sure that the hidden-input appears _after_ the 'dummy-f
 Bug reports and pull requests are welcome on GitHub at https://github.com/brancadavide/rails_ajax_formhandler. 
 For support just contact me [info@yield-in.de](mailto:info@yield-in.de)
 
+## Credits
 
+Author: Davide Brancaccio
+
+You're welcome to join the contributors-list!
 
 ## License
 
