@@ -189,12 +189,11 @@ That gives you the possibility, passing some other informations alongside the er
 Insert your validations in the model and pass your error-messages like:
 
 
-```ruby
-validates :firstname, presence: { message: "We need your firstname!"}
-
+```ruby 
+ validates :firstname, presence: { message: "We need your firstname!"}
 ```
 
-If you're not familiar with, please refer to [http://guides.rubyonrails.org](http://guides.rubyonrails.org/active_record_validations.html).
+More about rails validations: [http://guides.rubyonrails.org](http://guides.rubyonrails.org/active_record_validations.html).
 
 
 ## Multiple Forms
