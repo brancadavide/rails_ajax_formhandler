@@ -206,7 +206,7 @@ PLEASE NOTE THAT VALIDATION-RENDERING NOT WORKING WITH NESTED ATTRIBUTES, AT LEA
 
 
 	FormHandler.prototype.filter_form_name = function(form_id) {
-		var form_name,form_name_parts = form_id.replace(/(new_|edit_)/g, '').split('_');
+		var form_name,form_name_parts = form_id.replace(/(new_|edit_|form_)/g, '').split('_');
 		var last_part = form_name_parts[form_name_parts.length -1]
 		if(isNaN(parseInt(last_part))){
 			form_name = form_name_parts.join("_")
@@ -232,11 +232,16 @@ PLEASE NOTE THAT VALIDATION-RENDERING NOT WORKING WITH NESTED ATTRIBUTES, AT LEA
 		var global_defaults = this.global_defaults;
 		var count = 0;
 		$.each($('form'),function(index,form) {			
-			
+			if(form.id) {	
 			var form_name = form_handler.filter_form_name(form.id);
-			var form_object = {	id: form.id, ignore: false};
+			var form_object = {	id: form.id, ignore: false, index: index};
 					$.extend(true,form_object,global_defaults);
 					form_objects[form_name] = form_object;
+			}
+			else {
+				console.log("Missing id on this form: the id must start with \"form_\" and end with the underscored modelname. Example: modelname is \"ClientHistory\" so the id must be \"form_client_history\". ")
+				return false;
+			}
 
 		})
 		return form_objects;
@@ -244,15 +249,19 @@ PLEASE NOTE THAT VALIDATION-RENDERING NOT WORKING WITH NESTED ATTRIBUTES, AT LEA
 
 
 	FormHandler.prototype.init = function() {
-		var instances = {};
-		$.each(this.form_objects, function(name, settings) {
+		if(this.form_objects) {	
+			var instances = {};
+			$.each(this.form_objects, function(name, settings) {
 			
 			if(!settings.ignore) {
 				instances[name] = new FormObject(settings.id, settings);
 				instances[name].set_listener()	
 			}
-		})
-		this.instances = instances;
+			})
+			this.instances = instances;
+		} else {
+			return false
+		}
 	
 	};
 
