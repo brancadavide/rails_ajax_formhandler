@@ -234,7 +234,7 @@ PLEASE NOTE THAT VALIDATION-RENDERING NOT WORKING WITH NESTED ATTRIBUTES, AT LEA
 		$.each($('form'),function(index,form) {			
 			if(form.id) {	
 			var form_name = form_handler.filter_form_name(form.id);
-			var form_object = {	id: form.id, ignore: false, index: index};
+			var form_object = {	id: form.id, ignore: false, name: form_name};
 					$.extend(true,form_object,global_defaults);
 					form_objects[form_name] = form_object;
 			}
@@ -352,7 +352,7 @@ var FormObject = function(form_id, options) {
 	this.callbacks.on_error = options.error || function() {};
 	this.form_id = form_id;
 	this.form = $("#" + form_id);
-	this.form_object_name = "";
+	this.form_object_name = options.name;
 	this.method = "POST";
 	this.set_form_type();
 	this.html_options = options.html;
@@ -367,7 +367,7 @@ FormObject.prototype.set_form_type = function() {
 	if(form.find("input[name='_method']").length > 0) {
 		this.method = form.find("input[name='_method']").first().val();
 	}
-	this.form_object_name = this.form_id;
+	
 };
 
 
@@ -460,6 +460,7 @@ FormObject.prototype.get_ajax_settings = function(event,values) {
 
 	FormObject.prototype.error = function(response_object) {
 		var errors;
+		console.log(response_object);
 		response_object[this.form_object] === undefined ? errors = response_object : errors = response_object[this.form_object]
 		this.validation_renderer.render(this.fields(),errors);
 
@@ -468,7 +469,6 @@ FormObject.prototype.get_ajax_settings = function(event,values) {
 	FormObject.prototype.success = function() {
 		var form_object = this;
 		var fields = this.fields();
-		console.log(fields);
 		$.each(fields,function(key,value) {
 			var field = $("#" + value); 
 			form_object.validation_renderer.remove_error(field);
