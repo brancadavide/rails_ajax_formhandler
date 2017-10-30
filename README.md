@@ -40,6 +40,10 @@ If you want to use built in validation-styles, add to your application.scss
 
 ## Usage
 
+#Important
+This works 'out of the box' with 'form_for'. Since Rails 5.1 the new 'form_with' is standard and 'form_for' will be removed completely removed in future releases. Until than,
+the ajax_formhandler works with 'form_with' only with a little workaround, see below under "form_with". As soon as 'form_for' is completely removed, we'll come up with a new version, written explicitly for 'form_with'!
+
 This works with standard generated scaffold controllers, models and views seamlessely!
 Just add the following line to your js-file, for example 'client.js':
 
@@ -234,6 +238,24 @@ would look like
 ```
 
 In this case please make sure that the hidden-input appears _after_ the 'dummy-field', like in the example above in order to render validation errors properly!
+
+# Using with "form_with"
+
+## in *_form.html.erb* 
+
+Adding an id , starting with "form_", ending with the modelname to the "form_with"- tag.
+"form_with" doesn't add an id automatically, so you need to add an id in the same fashion:
+`<modelname>_<fieldname>`
+
+
+```ruby
+...
+<%=form_with model: costumer_bill, id: "form_costumer_bill" do |form|%>
+   .... 
+    <%= form.text_field :name, id: "costumer_bill_name" %>
+  ...
+<% end %>
+```
 
 
 

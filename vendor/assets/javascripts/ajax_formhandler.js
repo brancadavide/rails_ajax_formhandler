@@ -193,7 +193,7 @@ PLEASE NOTE THAT VALIDATION-RENDERING NOT WORKING WITH NESTED ATTRIBUTES, AT LEA
 
 */
 
-
+	
 
 	var FormHandler = function(options) {
 		var options = options || {};
@@ -239,7 +239,7 @@ PLEASE NOTE THAT VALIDATION-RENDERING NOT WORKING WITH NESTED ATTRIBUTES, AT LEA
 					form_objects[form_name] = form_object;
 			}
 			else {
-				console.log("Missing id on this form: the id must start with \"form_\" and end with the underscored modelname. Example: modelname is \"ClientHistory\" so the id must be \"form_client_history\". ")
+				console.error("Missing id on this form: the id must start with \"form_\" and end with the underscored modelname. Example: modelname is \"ClientHistory\" so the id must be \"form_client_history\". ")
 				return false;
 			}
 
@@ -364,23 +364,10 @@ var FormObject = function(form_id, options) {
 }
 FormObject.prototype.set_form_type = function() {
 	var form = $("#" + this.form_id);
-	var to_array = this.form_id.split("_");
-
-			if(to_array[0] === "edit" && !isNaN( parseInt(to_array[to_array.length -1]) ) ) {
-				
-					method = "PATCH"
-					this.form_object_name = to_array.slice(1,(to_array.length -1) ).join("_")
-					
-				
-				} else if(to_array[0] === "new") {	
-
-					if(to_array.length > 2) {
-							this.form_object_name = to_array.slice(1,(to_array.length) ).join("_")
-					} else {
-							this.form_object_name = to_array[1]
-					}
-					
-				}	
+	if(form.find("input[name='_method']").length > 0) {
+		this.method = form.find("input[name='_method']").first().val();
+	}
+	this.form_object_name = this.form_id;
 };
 
 
@@ -419,6 +406,7 @@ FormObject.prototype.get_ajax_settings = function(event,values) {
 				$.ajax(ajax_settings)
 		})
 	};
+
 
 	FormObject.prototype.set_redirections = function(redirections) {
 		var redirections = redirections || {};
