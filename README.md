@@ -20,13 +20,21 @@ gem 'rails_ajax_formhandler'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
     $ gem install rails_ajax_formhandler
 
 In your application.js 
+
+if not already done:
+
+```js
+//=require jquery
+```
+
+after that:
 
 ```js
 //=require ajax_formhandler
@@ -48,7 +56,7 @@ This works with standard generated scaffold controllers, models and views seamle
 Just add the following line to your js-file, for example 'client.js':
 
 ```js
-$(document).ready(function{
+$(document).ready(function() {
  
   var form_handler = new FormHandler();
   form_handler.init();
