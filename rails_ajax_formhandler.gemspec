@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["info@yield-in.de"]
 
   spec.summary       = %q{Handling form submissions via ajax and rendering validation-errors automatically}
-  spec.description   = %q{RailsAjaxFormhandler is a lightweight Javascript-plugin wich submits your form automatically and displays server responded validation-errors by adding styles and error-messages to the invalid input fields. }
+  spec.description   = %q{RailsAjaxFormhandler is a lightweight Javascript-plugin which submits your form automatically and displays server responded validation-errors by adding styles and error-messages to the invalid input fields. }
   spec.homepage      = "https://github.com/brancadavide/rails_ajax_formhandler"
   spec.license       = "MIT"
 
@@ -28,6 +28,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency 'sprockets-rails', '>= 2.1.3'
-  spec.add_development_dependency 'jquery-rails', '>= 3.1.0'
+  spec.add_runtime_dependency 'jquery-rails', '>= 3.1.0'
 
 end
